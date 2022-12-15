@@ -1,0 +1,15 @@
+{namespace soy.examples.features}
+
+
+/**
+ * Private helper to build a comma separated list.
+ * @param items The list of items.
+ */
+{template .buildCommaSeparatedList_ private="true"}
+    {foreach $item in $items}
+        {if not isFirst($item)}
+            ,{sp}
+        {/if}
+        {$item}
+    {/foreach}
+{/template}

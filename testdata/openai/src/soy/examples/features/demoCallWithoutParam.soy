@@ -1,0 +1,24 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo 'call' without 'param's.
+ * @param name The name of the person who took a trip.
+ * @param tripInfo The full record of the trip ('name' and 'destination').
+ */
+{template .demoCallWithoutParam}
+
+    // Call template defined in a different file.
+    {call soy.examples.simple.helloWorld /}<br>
+
+    // Call template defined in this file.
+    {call .tripReport_ /}<br>
+
+    // Pass all of the current template data to the callee.
+    // Note: Only the top-level key 'name' will be used because it matches the name of a parameter
+    // expected by the callee.
+    {call .tripReport_ data="all" /}<br>
+
+    // Pass a subset of the current template data to the callee.
+    {call .tripReport_ data="$tripInfo" /}<br>
+
+{/template}

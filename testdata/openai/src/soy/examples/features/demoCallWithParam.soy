@@ -1,0 +1,31 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo 'call' with 'param's.
+ * @param name The name of the person who took the trips.
+ * @param companionName The name of the person who went along for the odd-numbered trips only.
+ * @param destinations List of destinations visited by this person.
+ */
+{template .demoCallWithParam}
+
+    {foreach $destination in $destinations}
+
+        // Pass the current template data and also pass a parameter.
+        // Note: Only passing data="all" is not sufficient for providing the 'destination' parameter of
+        // the callee because $destination is a local variable here, not part of the template data
+        // passed by data="all".
+        {call .tripReport_ data="all"}
+            {param destination: $destination /}
+        {/call}<br>
+
+        {if index($destination) % 2 == 0}  // even index means odd-numbered trip since index is 0-based
+        // Pass two parameters.
+        {call .tripReport_}
+            {param name: $companionName /}
+            {param destination: $destination /}
+        {/call}<br>
+        {/if}
+
+    {/foreach}
+
+{/template}

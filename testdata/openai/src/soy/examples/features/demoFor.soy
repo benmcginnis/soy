@@ -1,0 +1,18 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo 'for'.
+ * @param numLines The number of lines to display.
+ */
+{template .demoFor}
+
+    {for $i in range($numLines)}
+        Line {$i + 1} of {$numLines}.<br>
+    {/for}
+
+    {for $i in range(2, 10, 2)}
+        {$i}...{sp}
+    {/for}
+    Who do we appreciate?<br>
+
+{/template}

@@ -1,0 +1,20 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo 'call' with a 'param' block.
+ * @param name The name of the person who took the trip.
+ */
+{template .demoCallWithParamBlock}
+    // Pass 2 parameters, one of which is built using Soy code.
+    {call .tripReport_}
+        {param name: $name /}
+        {param destination}
+            {switch randomInt(3)}
+                {case 0}Boston
+                {case 1}Singapore
+                {case 2}Zurich
+            {/switch}
+        {/param}
+    {/call}
+    <br>
+{/template}

@@ -1,0 +1,22 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo 'if'.
+ * @param pi An approximate value for pi.
+ */
+{template .demoIf}
+    {if round($pi, 2) == 3.14}
+        {msg desc="Example: 3.1416 is a good approximation of pi."}
+            {$pi} is a good approximation of pi.
+        {/msg}
+    {elseif round($pi) == 3}
+        {msg desc="Example: 3.1 is a bad approximation of pi."}
+            {$pi} is a bad approximation of pi.
+        {/msg}
+    {else}
+        {msg desc="Example: 5 is nowhere near the value of pi."}
+            {$pi} is nowhere near the value of pi.
+        {/msg}
+    {/if}
+    <br>
+{/template}

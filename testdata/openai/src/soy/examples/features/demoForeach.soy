@@ -1,0 +1,32 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo 'foreach'.
+ * @param persons List of persons. Each person must have 'name' and 'numWaffles'.
+ */
+{template .demoForeach}
+
+    {foreach $person in $persons}
+
+        {if isFirst($person)}
+            First,
+        {elseif isLast($person)}
+            Finally,
+        {else}
+            Then
+        {/if}
+        {sp}
+
+        {if $person.numWaffles == 1}
+            {$person.name} ate 1 waffle.
+        {else}
+            {$person.name} ate {$person.numWaffles} waffles.
+        {/if}
+        <br>
+
+    {ifempty}
+        Nobody here ate any waffles.<br>
+
+    {/foreach}
+
+{/template}

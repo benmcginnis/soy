@@ -1,0 +1,23 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo raw text commands.
+ */
+{template .demoRawTextCommands}
+    <pre>
+  // Special characters.
+        Space       : AA{sp}BB<br>
+  Empty string: AA{nil}BB<br>
+  New line    : AA{\n}BB<br>
+  Carriage ret: AA{\r}BB<br>
+  Tab         : AA{\t}BB<br>
+  Left brace  : AA{lb}BB<br>
+  Right brace : AA{rb}BB<br>
+
+        // Literal block.
+        // Note: Lines are not joined and indentation is not stripped, so the new line and 2-space indent
+        // between 'CC' and 'DD' will appear in the output exactly as written.
+        Literal     : {literal}AA	BB { CC
+        DD } EE {sp}{\n}{rb} FF{/literal}
+  </pre>
+{/template}

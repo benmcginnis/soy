@@ -1,0 +1,15 @@
+{namespace soy.examples.simple}
+
+/**
+ * Says hello to a person (or to the world if no person is given).
+ * @param? name The name of the person to say hello to.
+ */
+{template .helloName}
+    {if hasData() and $name}
+        {msg desc="Says hello to a person."}
+            Hello {$name}!
+        {/msg}
+    {else}
+        {call .helloWorld /}
+    {/if}
+{/template}

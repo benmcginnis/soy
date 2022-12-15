@@ -1,0 +1,16 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo 'print'.
+ * @param boo Something scary.
+ * @param two Preferably the number 2.
+ */
+{template .demoPrint}
+    {print 'Boo!'}<br>  // print a string
+    {'Boo!'}<br>  // the command name 'print' is implied
+    {1 + 2}<br>  // print the result of an expression
+    {$boo}<br>  // print a data value
+    {1 + $two}<br>  // print the result of an expression that uses a data value
+    {GLOBAL_INT}, {GLOBAL_BOOL}.<br>  // print globals
+{/template}
+

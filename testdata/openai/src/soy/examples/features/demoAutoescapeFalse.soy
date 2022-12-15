@@ -1,0 +1,12 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo autoescape false.
+ * @param italicHtml A string surrounded by HTML italics tags.
+ */
+{template .demoAutoescapeFalse autoescape="false"}
+    // Note: Use autoescape="false" with care, as more cross-site scripting bugs may slip through.
+
+    {$italicHtml}<br>  // no autoescaping will be applied
+    {$italicHtml |escapeHtml}<br>  // escapeHtml directive applies HTML escaping
+{/template}

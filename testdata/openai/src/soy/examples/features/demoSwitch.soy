@@ -1,0 +1,20 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo 'switch'.
+ * @param name The name of a kid.
+ */
+{template .demoSwitch}
+    Dear {$name}, &nbsp;
+
+    {switch $name}
+        {case 'Go'}
+            You've been bad this year.
+        {case 'Fay', 'Ivy'}
+            You've been good this year.
+        {default}
+            You don't really believe in me, do you?
+    {/switch}
+
+    &nbsp; --Santa<br>
+{/template}

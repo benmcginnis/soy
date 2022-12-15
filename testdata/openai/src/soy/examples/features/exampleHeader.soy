@@ -1,0 +1,11 @@
+{namespace soy.examples.features}
+
+/**
+ * Template for printing the header to add before each example.
+ * @param exampleNum The number of the example.
+ * @param exampleName The name of the example.
+ */
+{template .exampleHeader}
+    <hr>
+    <b>{$exampleNum}. {$exampleName}</b><br>
+{/template}

@@ -1,0 +1,25 @@
+{namespace soy.examples.features}
+
+/**
+ * Demo {param} blocks with 'kind' attribute.
+ * @param message A message text.
+ * @param list A list of things.
+ */
+{template .demoParamWithKindAttribute autoescape="contextual"}
+    <div>
+        {call .demoParamWithKindAttributeCallee_}
+        // Note that the {param} blocks for the message and listItems parameter are declared to have
+        // content of kind HTML. This instructs the contextual autoescaper to process the content of
+        // these blocks as HTML, and to wrap the the value of the parameter as a soydata.SanitizedHtml
+        // object.
+            {param message kind="html"}
+                <b>{$message}</b>
+            {/param}
+            {param listItems kind="html"}
+                {foreach $i in $list}
+                    <li>{$i}</li>
+                {/foreach}
+            {/param}
+        {/call}
+    </div>
+{/template}
