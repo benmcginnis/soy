@@ -2,15 +2,18 @@ import * as React from 'react';
 import { GLOBAL_BOOL, GLOBAL_INT } from '../../../Globals';
 import { print } from '../../../soyfuncs';
 
+export interface DemoPrintProps {
+  boo: any;
+  two: any;
+}
+
 /**
  * Demo 'print'.
+ * @param props
  * @param props.boo Something scary.
  * @param props.two Preferably the number 2.
  */
-export const DemoPrint = (props: {
-  boo: any
-  two: any
-}) => {
+export const DemoPrint = (props: DemoPrintProps) => {
   const { boo, two } = props;
   return (
     <>

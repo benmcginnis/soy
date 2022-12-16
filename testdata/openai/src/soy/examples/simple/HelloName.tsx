@@ -2,11 +2,16 @@ import * as React from 'react';
 import { Trans } from 'react-i18next'
 import { HelloWorld } from './helloWorld';
 
+export interface HelloNameParams {
+  name: string;
+}
+
 /**
  * Says hello to a person (or to the world if no person is given).
+ * @param props
  * @param? props.name The name of the person to say hello to.
  */
-export const HelloName = (props: { name: string }) => {
+export const HelloName = (props: HelloNameParams) => {
   const { name } = props;
   if (name) {
     return (

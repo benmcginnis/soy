@@ -1,16 +1,22 @@
 import * as React from 'react';
+import { Trans } from 'react-i18next';
 import { hasData } from '../../../soyfuncs';
 
+export interface TripReportProps {
+  name?: any;
+  destination?: any;
+}
 
 /**
- * Private helper for DemoCallWithoutParams, DemoCallWithParams, and DemoCallWithParamBlock.
+ * Private helper for DemoCallWithoutProps, DemoCallWithProps, and DemoCallWithParamBlock.
  * Reports on a trip.
- * @param? name The name of the person who took a trip (optional).
- * @param? destination The destination of the trip (optional).
+ * @param props TripReportProps
+ * @param? props.name The name of the person who took a trip (optional).
+ * @param? props.destination The destination of the trip (optional).
  *
  * @internal
  */
-export const TripReport_ = (props :{ name? :any, destination? :any }) => {
+export const TripReport_ = (props: TripReportProps) => {
   const { name, destination } = props;
   return (
     <>
@@ -23,31 +29,25 @@ export const TripReport_ = (props :{ name? :any, destination? :any }) => {
 
       {(() =>{
         if (!(hasData() && name))  {
+          // Note: The message below demonstrates that the 'desc' attribute can be left empty. However,
+          // this is not recommended except for the simplest messages, otherwise you risk confusing some
+          // translators and getting poor translations.
           return (
-            <>
-              {/* Note: The message below demonstrates that the 'desc' attribute can be left empty. However, */}
-              {/* this is not recommended except for the simplest messages, otherwise you risk confusing some */}
-              {/* translators and getting poor translations. */}
-              {/*{msg desc=""}*/}
-              A trip was taken.
-              {/*{/msg}*/}
-            </>
+              <Trans>
+                A trip was taken.
+              </Trans>
           )
         } else if (!destination)  {
           return (
-            <>
-              {/*{msg desc="Example: Alice took a trip."}*/}
-              {name} took a trip.
-              {/*{/msg}*/}
-            </>
+              <Trans i18nKey= "Example: Alice took a trip.">
+                {name} took a trip.
+              </Trans>
           )
         } else {
           return (
-            <>
-              {/*{msg desc="Example: Alice took a trip to wonderland."}*/}
-              {name} took a trip to {destination}.
-              {/*{/msg}*/}
-            </>
+              <Trans i18nKey= "Example: Alice took a trip to wonderland.">
+                {name} took a trip to {destination}.
+              </Trans>
           )
         }
       })()}

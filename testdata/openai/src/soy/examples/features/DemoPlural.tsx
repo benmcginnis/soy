@@ -1,11 +1,16 @@
 import * as React from 'react';
 import { Trans } from 'react-i18next'
 
+export interface DemoPluralProps {
+  eggs: number;
+}
+
 /**
  * Demo 'plural'.
+ * @param props
  * @param props.eggs The number of eggs you need to buy
  */
-export const DemoPlural = (props: {eggs: number}) => {
+export const DemoPlural = (props: DemoPluralProps) => {
   const { eggs } = props;
   return (
     <>

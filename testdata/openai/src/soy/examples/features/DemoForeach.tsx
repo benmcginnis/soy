@@ -1,10 +1,15 @@
 import * as React from 'react';
 
+export interface DemoForeachProps {
+  persons: any;
+}
+
 /**
  * Demo 'foreach'.
+ * @param props DemoForeachProps
  * @param props.persons List of persons. Each person must have 'name' and 'numWaffles'.
  */
-export const DemoForeach = (props: { persons :any } ) => {
+export const DemoForeach = (props: DemoForeachProps ) => {
   const { persons } = props;
   return (
     <>

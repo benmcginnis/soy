@@ -1,10 +1,15 @@
 import * as React from 'react';
 
+export interface DemoSwitchProps {
+  name: string;
+}
+
 /**
  * Demo 'switch'.
+ * @param props
  * @param props.name The name of a kid.
  */
-export const DemoSwitch = (props :{ name :string }) => {
+export const DemoSwitch = (props :DemoSwitchProps) => {
   const { name } = props;
   return (
     <>

@@ -1,18 +1,21 @@
 import * as React from 'react';
 import { TripReport_ } from './TripReport_';
 
+export interface DemoCallWithParamProps {
+  name: any;
+  companionName: any;
+  destinations: any;
+}
+
 /**
  * Demo 'call' with 'param's.
+ * @param props DemoCallWithParamProps
  * @param props.name The name of the person who took the trips.
  * @param props.companionName The name of the person who went along for the odd-numbered trips only.
  * @param props.destinations List of destinations visited by this person.
  */
-export const DemoCallWithParam = (props :{
-  name :any
-  companionName :any
-  destinations :any
-}) => {
-  const { name, companionName, destinations } = props;
+export const DemoCallWithParam = (props :DemoCallWithParamProps) => {
+  const { companionName, destinations } = props;
   return (
     <>
       {destinations.map((destination, index)=>{

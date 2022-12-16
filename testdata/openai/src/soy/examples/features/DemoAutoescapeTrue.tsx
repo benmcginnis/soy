@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { noAutoescape } from '../../../soyfuncs';
 
+export interface DemoAutoescapeTrueProps {
+  italicHtml: any;
+}
+
 /**
  * Demo autoescape true.
+ * @param props DemoAutoescapeTrueProps
  * @param props.italicHtml A string surrounded by HTML italics tags.
  */
-export const DemoAutoescapeTrue = (props: {
-  italicHtml: any
-}) => {
+export const DemoAutoescapeTrue = (props: DemoAutoescapeTrueProps) => {
   const { italicHtml } = props;
   return (
     <>

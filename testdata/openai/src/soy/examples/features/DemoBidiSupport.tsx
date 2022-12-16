@@ -2,15 +2,22 @@ import * as React from 'react';
 import { Trans } from 'react-i18next';
 import { bidiDirAttr, bidiEndEdge, bidiSpanWrap, bidiUnicodeWrap } from '../../../soyfuncs';
 
+export interface DemoBidiSupportProps {
+  title: any;
+  author: any;
+  year: any;
+  keywords: any;
+}
 
 /**
  * Demo BiDi support.
+ * @param props DemoBidiSupportProps
  * @param props.title Book title.
  * @param props.author Author's name.
  * @param props.year Year published.
  * @param props.keywords List of keywords.
  */
-export const DemoBidiSupport = (props :{title :any, author :any, year :any, keywords :any }) => {
+export const DemoBidiSupport = (props: DemoBidiSupportProps) => {
   const { title, author, year, keywords } = props;
   return (
     <>

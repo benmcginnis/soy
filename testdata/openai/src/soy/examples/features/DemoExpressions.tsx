@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { ceiling, randomInt, round } from '../../../soyfuncs';
 
+export interface DemoExpressionsProps {
+  students: any;
+  currentYear: any;
+}
+
 /**
  * Demo expressions.
+ * @param props DemoExpressionsProps
  * @param props.students Nonempty list of students. Each student must have 'name', 'major', and 'year'.
  * @param props.currentYear The current year.
  */
-export const DemoExpressions = (props :{
-  students :any
-  currentYear :any
-}) => {
+export const DemoExpressions = (props :DemoExpressionsProps) => {
   const { students, currentYear } = props;
   return (
     <>

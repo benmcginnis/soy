@@ -2,12 +2,18 @@ import * as React from 'react';
 import { HelloWorld } from '../simple/HelloWorld';
 import { TripReport_ } from './TripReport_';
 
+export interface DemoCallWithoutParamProps {
+  name: any;
+  tripInfo: any;
+}
+
 /**
  * Demo 'call' without 'param's.
+ * @param props DemoCallWithoutParamProps
  * @param props.name The name of the person who took a trip.
  * @param props.tripInfo The full record of the trip ('name' and 'destination').
  */
-export const DemoCallWithoutParam = (props :{ name :any, tripInfo :any }) => {
+export const DemoCallWithoutParam = (props :DemoCallWithoutParamProps) => {
   const { name, tripInfo } = props;
   return (
     <>

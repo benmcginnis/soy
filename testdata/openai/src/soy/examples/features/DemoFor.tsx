@@ -1,11 +1,16 @@
 import * as React from 'react';
 import { range } from '../../../soyfuncs';
 
+export interface DemoForProps {
+  numLines: any;
+}
+
 /**
  * Demo 'for'.
+ * @param props DemoForProps
  * @param props.numLines The number of lines to display.
  */
-export const DemoFor = (props :{ numLines :any }) => {
+export const DemoFor = (props :DemoForProps) => {
   const { numLines } = props;
   return (
     <>

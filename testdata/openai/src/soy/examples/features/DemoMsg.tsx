@@ -1,12 +1,18 @@
 import * as React from 'react';
 import { Trans } from 'react-i18next'
 
+export interface DemoMsgProps {
+  name: string;
+  labsUrl: string;
+}
+
 /**
  * Demo 'msg'.
+ * @param props
  * @param props.name - The name of the person to say hello to.
  * @param props.labsUrl - The URL of the unreleased 'Labs' feature.
  */
-export const DemoMsg = (props: { name: string; labsUrl: string }) => {
+export const DemoMsg = (props: DemoMsgProps) => {
   const { name, labsUrl } = props;
   return (
     <>

@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { id, insertWordBreaks } from '../../../soyfuncs';
 
+export interface DemoPrintDirectivesProps {
+  longVarName: any;
+  elementId: any;
+  cssClass: any;
+}
+
 /**
  * Demo print directives.
+ * @param props
  * @param props.longVarName Some ridiculously long variable name.
  * @param props.elementId The id for an element.
  * @param props.cssClass A CSS class name.
  */
-export const DemoPrintDirectives = (props: {
-  longVarName: any
-  elementId: any
-  cssClass: any
-}) => {
+export const DemoPrintDirectives = (props: DemoPrintDirectivesProps) => {
   const { longVarName, elementId, cssClass } = props;
   return (
     <>

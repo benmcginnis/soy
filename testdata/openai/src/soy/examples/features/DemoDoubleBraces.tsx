@@ -2,12 +2,18 @@ import * as React from 'react';
 import { BuildCommaSeparatedList_ } from './BuildCommaSeparatedList_';
 import { Trans } from 'react-i18next';
 
+export interface DemoDoubleBracesProps {
+  setName: any;
+  setMembers: any;
+}
+
 /**
  * Demo double braces.
+ * @param props DemoDoubleBracesProps
  * @param props.setName The name of the infinite set.
  * @param props.setMembers List of the first few members of the set.
  */
-export const DemoDoubleBraces = (props :{ setName :any, setMembers :any}) => {
+export const DemoDoubleBraces = (props :DemoDoubleBracesProps) => {
   const { setName, setMembers } = props;
 
   return (

@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { DemoParamWithKindAttributeCallee_ } from './DemoParamWithKindAttributeCallee_';
 
+export interface DemoParamWithKindAttributeProps {
+  message: any;
+  list: any;
+}
+
 // TODO: figure out how to implement this contextual autoescaping
 /**
  * Demo {param} blocks with 'kind' attribute.
+ * @param props
  * @param props.message A message text.
  * @param props.list A list of things.
  */
-export const DemoParamWithKindAttribute = (props :{ message :any, list :any }) => {
+export const DemoParamWithKindAttribute = (props :DemoParamWithKindAttributeProps) => {
   const { message, list } = props;
   // autoescape="contextual"
   return (

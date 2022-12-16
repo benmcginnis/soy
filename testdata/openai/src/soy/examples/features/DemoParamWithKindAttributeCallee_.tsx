@@ -1,13 +1,19 @@
 import * as React from 'react';
 
+export interface DemoParamWithKindAttributeCallee_Props {
+  message: any;
+  listItems: any;
+}
+
 /**
  * Demo {param} blocks with 'kind' attribute.
+ * @param props
  * @param props.message A message with HTML markup.
  * @param props.listItems A HTML-formatted list.
  *
  * @internal
  */
-export const DemoParamWithKindAttributeCallee_ = (props :{ message :any, listItems :any }) => {
+export const DemoParamWithKindAttributeCallee_ = (props :DemoParamWithKindAttributeCallee_Props) => {
   const { message, listItems } = props;
   // private="true" autoescape="contextual"
   // TODO: how to actually mimic this in jsx?
