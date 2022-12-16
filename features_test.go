@@ -457,7 +457,7 @@ func runFeatureTests(t *testing.T, tests []featureTest) {
 	}
 
 	b := new(bytes.Buffer)
-	for _, test := range tests {
+	for i, test := range tests {
 		b.Reset()
 		err = tofu.Render(b, "soy.examples.features."+test.name, test.data)
 		if err != nil {
@@ -467,7 +467,16 @@ func runFeatureTests(t *testing.T, tests []featureTest) {
 
 		result := b.String()
 
-		if _, err = f.Write([]byte(result)); err != nil {
+		headerBuffer := new(bytes.Buffer)
+		if err = tofu.Render(
+			headerBuffer,
+			"soy.examples.features.exampleHeader",
+			d{"exampleName": test.name, "exampleNum": i},
+		); err != nil {
+			t.Error(err)
+		}
+
+		if _, err = f.Write([]byte(fmt.Sprintf("%s%s",headerBuffer.String(), result))); err != nil {
 			t.Error(err)
 		}
 

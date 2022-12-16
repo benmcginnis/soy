@@ -18,7 +18,7 @@ export const DemoCallWithParam = (props :DemoCallWithParamProps) => {
   const { companionName, destinations } = props;
   return (
     <>
-      {destinations.map((destination, index)=>{
+      {destinations.map((destination :any, index :number)=>{
         return (
           <React.Fragment key={index}>
             {/* Pass the current template data and also pass a parameter. */}

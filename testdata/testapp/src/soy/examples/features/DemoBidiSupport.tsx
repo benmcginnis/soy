@@ -66,7 +66,7 @@ export const DemoBidiSupport = (props: DemoBidiSupportProps) => {
         </Trans>
         :{' '}
         <select>
-          {keywords.map((keyword, index, arr) => {
+          {keywords.map((keyword :any, index: number) => {
             return (
               <React.Fragment key={index}>
                 {/* Mark-up is not allowed under the option element, and setting its dir attribute does not */}

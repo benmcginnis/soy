@@ -7,7 +7,7 @@ export interface ExampleHeaderProps {
 
 /**
  * Template for printing the header to add before each example.
- * @param props
+ * @param props ExampleHeaderProps
  * @param props.exampleNum The number of the example.
  * @param props.exampleName The name of the example.
  */

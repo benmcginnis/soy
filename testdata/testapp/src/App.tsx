@@ -16,93 +16,149 @@ import { DemoPrint } from './soy/examples/features/DemoPrint';
 import { DemoPrintDirectives } from './soy/examples/features/DemoPrintDirectives';
 import { DemoRawTextCommands } from './soy/examples/features/DemoRawTextCommands';
 import { DemoSwitch } from './soy/examples/features/DemoSwitch';
+import { ExampleHeader } from './soy/examples/features/ExampleHeader';
 
 function App() {
+    const Examples = [{
+        name: "demoComments",
+        example: () => { return (<DemoComments /> )}
+    },
+        {
+            name: "demoLineJoining",
+            example: () => { return (<DemoLineJoining /> )}
+        },
+        {
+            name: "demoRawTextCommands",
+            example: () => { return (<DemoRawTextCommands /> )}
+        },
+        {
+            name: "demoPrint",
+            example: () => { return (<DemoPrint boo={"Boo!"} two={2} /> )}
+        },
+        {
+            name: "demoPrintDirectives",
+            example: () => { return (<DemoPrintDirectives
+              longVarName={"thisIsSomeRidiculouslyLongVariableName"}
+              elementId={"my_element_id"}
+              cssClass={"my_css_class"}
+            /> )}
+        },
+        {
+            name: "demoAutoescapeTrue",
+            example: () => { return (<DemoAutoescapeTrue italicHtml={<i>italic</i>}/> )}
+        },
+        {
+            name: "demoAutoescapeFalse",
+            example: () => { return (<DemoAutoescapeFalse italicHtml={<i>italic</i>}/> )}
+        },
+        {
+            name: "demoMsg",
+            example: () => { return (<DemoMsg name={"Ed"} labsUrl={"http://labs.google.com"}/> )}
+        },
+        {
+            name: "demoPlural",
+            example: () => { return (<DemoPlural eggs={1} /> )}
+        },
+        {
+            name: "demoPlural",
+            example: () => { return (<DemoPlural eggs={2} /> )}
+        },
+        {
+            name: "demoPlural",
+            example: () => { return (<DemoPlural eggs={0} /> )}
+        },
+        {
+            name: "demoIf",
+            example: () => { return (<DemoIf pi={3.14159} /> )}
+        },
+        {
+            name: "demoIf",
+            example: () => { return (<DemoIf pi={2.71828} /> )}
+        },
+        {
+            name: "demoIf",
+            example: () => { return (<DemoIf pi={1.61803} /> )}
+        },
+        {
+            name: "demoSwitch",
+            example: () => { return (<DemoSwitch name={"Fay"} /> )}
+        },
+        {
+            name: "demoSwitch",
+            example: () => { return (<DemoSwitch name={"Go"} /> )}
+        },
+        {
+            name: "demoSwitch",
+            example: () => { return (<DemoSwitch name={"Hal"} /> )}
+        },
+        {
+            name: "demoSwitch",
+            example: () => { return (<DemoSwitch name={"Ivy"} /> )}
+        },
+        {
+            name: "demoForeach",
+            example: () => { return (<DemoForeach persons={[
+                {"name": "Jen", "numWaffles": 1},
+                {"name": "Kai", "numWaffles": 3},
+                {"name": "Lex", "numWaffles": 1},
+                {"name": "Mel", "numWaffles": 2},
+            ]} /> )}
+        },
 
-  return (
-    <>
-      <h3>demoComments</h3>
-      <DemoComments />
-      <h3>demoLineJoining</h3>
-      <DemoLineJoining />
-      <h3>demoRawTextCommands</h3>
-      <DemoRawTextCommands />
-      <h3>demoPrint</h3>
-      <DemoPrint boo={"Boo!"} two={2} />
-      <h3>demoPrintDirectives</h3>
-      <DemoPrintDirectives
-        longVarName={"thisIsSomeRidiculouslyLongVariableName"}
-        elementId={"my_element_id"}
-        cssClass={"my_css_class"}
-        />
-      <h3>demoAutoescapeTrue</h3>
-      <DemoAutoescapeTrue italicHtml={<i>italic</i>}/>
-      <h3>demoAutoescapeFalse</h3>
-      <DemoAutoescapeFalse italicHtml={<i>italic</i>}/>
-      <h3>demoMsg</h3>
-      <DemoMsg name={"Ed"} labsUrl={"http://labs.google.com"}/>
-      <h3>demoPlural</h3>
-      <DemoPlural eggs={1} />
-      <h3>demoPlural</h3>
-      <DemoPlural eggs={2} />
-      <h3>demoPlural</h3>
-      <DemoPlural eggs={0} />
-      <h3>demoIf</h3>
-      <DemoIf pi={3.14159} />
-      <h3>demoIf</h3>
-      <DemoIf pi={2.71828} />
-      <h3>demoIf</h3>
-      <DemoIf pi={1.61803} />
-      <h3>demoSwitch</h3>
-      <DemoSwitch name={"Fay"} />
-      <h3>demoSwitch</h3>
-      <DemoSwitch name={"Go"} />
-      <h3>demoSwitch</h3>
-      <DemoSwitch name={"Hal"} />
-      <h3>demoSwitch</h3>
-      <DemoSwitch name={"Ivy"} />
-      <h3>demoForeach</h3>
-      <DemoForeach persons={[
-        {"name": "Jen", "numWaffles": 1},
-        {"name": "Kai", "numWaffles": 3},
-        {"name": "Lex", "numWaffles": 1},
-        {"name": "Mel", "numWaffles": 2},
-      ]} />
+        {
+            name: "demoFor",
+            example: () => { return (<DemoFor numLines={3}/> )}
+        },
+        {
+            name: "demoCallWithoutParam",
+            example: () => { return (<DemoCallWithoutParam name={"Neo"} tripInfo={{name: "Neo", destination: "The Matrix"}}/> )}
+        },
+        {
+            name: "demoCallWithParam",
+            example: () => { return (<DemoCallWithParam
+              name={"Oz"}
+              companionName={"Pip"}
+              destinations={[
+                  "Gillikin Country",
+                  "Munchkin Country",
+                  "Quadling Country",
+                  "Winkie Country",
+              ]}
+            /> )}
+        },
+        {
+            name: "demoCallWithParamBlock",
+            example: () => { return (<DemoCallWithParamBlock name={"Quo"}/> )}
+        },
+        {
+            name: "demoExpressions",
+            example: () => { return (<DemoExpressions
+              currentYear={2008}
+              students= {[
+                  {name: "Rob", major: "Physics", year: 1999},
+                  {name: "Sha", major: "Finance", year: 1980},
+                  {name: "Tim", major: "Engineering", year: 2005},
+                  {name: "Uma", major: "Biology", year: 1972},
+              ]}
+            /> )}
+        },
+        {
+            name: "demoDoubleBraces",
+            example: () => { return (<DemoDoubleBraces
+              setName={"prime numbers"}
+              setMembers={[2, 3, 5, 7, 11, 13]}
+            /> )}
+        },
+    ];
 
-      <h3>demoFor</h3>
-      <DemoFor numLines={3}/>
-      <h3>demoCallWithoutParam</h3>
-      <DemoCallWithoutParam name={"Neo"} tripInfo={{name: "Neo", destination: "The Matrix"}}/>
-      <h3>demoCallWithParam</h3>
-      <DemoCallWithParam
-        name={"Oz"}
-        companionName={"Pip"}
-        destinations={[
-          "Gillikin Country",
-          "Munchkin Country",
-          "Quadling Country",
-          "Winkie Country",
-        ]}
-      />
-      <h3>demoCallWithParamBlock</h3>
-      <DemoCallWithParamBlock name={"Quo"}/>
-      <h3>demoExpressions</h3>
-      <DemoExpressions
-        currentYear={2008}
-        students= {[
-          {name: "Rob", major: "Physics", year: 1999},
-          {name: "Sha", major: "Finance", year: 1980},
-          {name: "Tim", major: "Engineering", year: 2005},
-          {name: "Uma", major: "Biology", year: 1972},
-        ]}
-      />
-      <h3>demoDoubleBraces</h3>
-      <DemoDoubleBraces
-        setName={"prime numbers"}
-        setMembers={[2, 3, 5, 7, 11, 13]}
-      />
-    </>
-  )
+  return Examples.map((ex, index: number) => {
+      return (
+        <>
+            <ExampleHeader exampleNum={index} exampleName={ex.name} />
+            <ex.example />
+        </>
+      )
+  })
 }
 
 export default App

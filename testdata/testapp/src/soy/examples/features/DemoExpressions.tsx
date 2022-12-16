@@ -20,7 +20,7 @@ export const DemoExpressions = (props :DemoExpressionsProps) => {
       Last student's year: {students[students.length - 1].year}<br/>
       Random student's major: {students[randomInt(students.length)].major}<br/>
 
-      {students.map((student, index, arr)=>{
+      {students.map((student :any, index :number, arr: any[])=>{
         return (
           <React.Fragment key={index}>
             {student.name}:

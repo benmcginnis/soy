@@ -36,7 +36,7 @@ export const DemoParamWithKindAttribute = (props :DemoParamWithKindAttributeProp
           listItems={(()=>{
             return (
               <>
-                {list.map((i)=>{
+                {list.map((i :number)=>{
                   return (
                     <React.Fragment key={i}>
                       <li>{i}</li>
