@@ -21,21 +21,22 @@ type d map[string]interface{}
 
 type featureTest struct {
 	name   string
+	namespace string
 	data   d
 	output string
 }
 
 var featureTests = []featureTest{
-	{"demoComments", nil, `blah blah<br>http://www.google.com<br>`},
+	{"demoComments", "", nil, `blah blah<br>http://www.google.com<br>`},
 
-	{"demoLineJoining", nil,
+	{"demoLineJoining", "", nil,
 		`First second.<br>` +
 			`<i>First</i>second.<br>` +
 			`Firstsecond.<br>` +
 			`<i>First</i> second.<br>` +
 			`Firstsecond.<br>`},
 
-	{"demoRawTextCommands", nil,
+	{"demoRawTextCommands", "", nil,
 		`<pre>Space       : AA BB<br>` +
 			`Empty string: AABB<br>` +
 			`New line    : AA
@@ -47,7 +48,7 @@ BB<br>` +
 			`Literal     : AA	BB { CC
   DD } EE {sp}{\n}{rb} FF</pre>`},
 
-	{"demoPrint", d{"boo": "Boo!", "two": 2},
+	{"demoPrint", "", d{"boo": "Boo!", "two": 2},
 		`Boo!<br>` +
 			`Boo!<br>` +
 			`3<br>` +
@@ -55,7 +56,7 @@ BB<br>` +
 			`3<br>` +
 			`88, false.<br>`},
 
-	{"demoPrintDirectives", d{
+	{"demoPrintDirectives", "", d{
 		"longVarName": "thisIsSomeRidiculouslyLongVariableName",
 		"elementId":   "my_element_id",
 		"cssClass":    "my_css_class",
@@ -65,34 +66,34 @@ BB<br>` +
 		`</div>id:<br>` +
 		`<span id="my_element_id" class="my_css_class" style="border:1px solid #000000">Hello</span>`},
 
-	{"demoAutoescapeTrue", d{"italicHtml": "<i>italic</i>"},
+	{"demoAutoescapeTrue", "", d{"italicHtml": "<i>italic</i>"},
 		`&lt;i&gt;italic&lt;/i&gt;<br>` +
 			`<i>italic</i><br>`},
 
-	{"demoAutoescapeFalse", d{"italicHtml": "<i>italic</i>"},
+	{"demoAutoescapeFalse", "", d{"italicHtml": "<i>italic</i>"},
 		`<i>italic</i><br>` +
 			`&lt;i&gt;italic&lt;/i&gt;<br>`},
 
-	{"demoMsg", d{"name": "Ed", "labsUrl": "http://labs.google.com"},
+	{"demoMsg", "", d{"name": "Ed", "labsUrl": "http://labs.google.com"},
 		`Hello Ed!<br>` +
 			`Click <a href="http://labs.google.com">here</a> to access Labs.<br>` +
 			`Archive<br>` +
 			`Archive<br>`},
 
-	{"demoPlural", d{"eggs": 1}, "You have one egg<br>"},
-	{"demoPlural", d{"eggs": 2}, "You have 2 eggs<br>"},
-	{"demoPlural", d{"eggs": 0}, "You have 0 eggs<br>"},
+	{"demoPlural", "", d{"eggs": 1}, "You have one egg<br>"},
+	{"demoPlural", "", d{"eggs": 2}, "You have 2 eggs<br>"},
+	{"demoPlural", "", d{"eggs": 0}, "You have 0 eggs<br>"},
 
-	{"demoIf", d{"pi": 3.14159}, `3.14159 is a good approximation of pi.<br>`},
-	{"demoIf", d{"pi": 2.71828}, `2.71828 is a bad approximation of pi.<br>`},
-	{"demoIf", d{"pi": 1.61803}, `1.61803 is nowhere near the value of pi.<br>`},
+	{"demoIf", "", d{"pi": 3.14159}, `3.14159 is a good approximation of pi.<br>`},
+	{"demoIf", "", d{"pi": 2.71828}, `2.71828 is a bad approximation of pi.<br>`},
+	{"demoIf", "", d{"pi": 1.61803}, `1.61803 is nowhere near the value of pi.<br>`},
 
-	{"demoSwitch", d{"name": "Fay"}, `Dear Fay, &nbsp;You've been good this year.&nbsp; --Santa<br>`},
-	{"demoSwitch", d{"name": "Go"}, `Dear Go, &nbsp;You've been bad this year.&nbsp; --Santa<br>`},
-	{"demoSwitch", d{"name": "Hal"}, `Dear Hal, &nbsp;You don't really believe in me, do you?&nbsp; --Santa<br>`},
-	{"demoSwitch", d{"name": "Ivy"}, `Dear Ivy, &nbsp;You've been good this year.&nbsp; --Santa<br>`},
+	{"demoSwitch", "", d{"name": "Fay"}, `Dear Fay, &nbsp;You've been good this year.&nbsp; --Santa<br>`},
+	{"demoSwitch", "", d{"name": "Go"}, `Dear Go, &nbsp;You've been bad this year.&nbsp; --Santa<br>`},
+	{"demoSwitch", "", d{"name": "Hal"}, `Dear Hal, &nbsp;You don't really believe in me, do you?&nbsp; --Santa<br>`},
+	{"demoSwitch", "", d{"name": "Ivy"}, `Dear Ivy, &nbsp;You've been good this year.&nbsp; --Santa<br>`},
 
-	{"demoForeach", d{"persons": []d{
+	{"demoForeach", "", d{"persons": []d{
 		{"name": "Jen", "numWaffles": 1},
 		{"name": "Kai", "numWaffles": 3},
 		{"name": "Lex", "numWaffles": 1},
@@ -102,20 +103,20 @@ BB<br>` +
 		`Then Lex ate 1 waffle.<br>` +
 		`Finally, Mel ate 2 waffles.<br>`},
 
-	{"demoFor", d{"numLines": 3},
+	{"demoFor", "", d{"numLines": 3},
 		`Line 1 of 3.<br>` +
 			`Line 2 of 3.<br>` +
 			`Line 3 of 3.<br>` +
 			`2... 4... 6... 8... Who do we appreciate?<br>`},
 
-	{"demoCallWithoutParam",
+	{"demoCallWithoutParam", "",
 		d{"name": "Neo", "tripInfo": d{"name": "Neo", "destination": "The Matrix"}},
 		`Hello world!<br>` +
 			`A trip was taken.<br>` +
 			`Neo took a trip.<br>` +
 			`Neo took a trip to The Matrix.<br>`},
 
-	{"demoCallWithParam", d{
+	{"demoCallWithParam", "", d{
 		"name":          "Oz",
 		"companionName": "Pip",
 		"destinations": []string{
@@ -130,9 +131,9 @@ BB<br>` +
 			`Pip took a trip to Quadling Country.<br>` +
 			`Oz took a trip to Winkie Country.<br>`},
 
-	{"demoCallWithParamBlock", d{"name": "Quo"}, `Quo took a trip to Zurich.<br>`},
+	{"demoCallWithParamBlock", "", d{"name": "Quo"}, `Quo took a trip to Zurich.<br>`},
 
-	{"demoExpressions", d{
+	{"demoExpressions", "", d{
 		"currentYear": 2008,
 		"students": []d{
 			{"name": "Rob", "major": "Physics", "year": 1999},
@@ -148,29 +149,36 @@ BB<br>` +
 			`Tim: Engineering. Young. 00s. 00s.<br>` +
 			`Uma: Last. Even. Biology. Scientist. 70s. 70s.<br>`},
 
-	{"demoDoubleBraces", d{
+	{"demoDoubleBraces", "", d{
 		"setName":    "prime numbers",
 		"setMembers": []int{2, 3, 5, 7, 11, 13},
 	},
 		`The set of prime numbers is {2, 3, 5, 7, 11, 13, ...}.`},
 
-	// 	{"demoBidiSupport", d{
-	// 		"title":  "2008: A BiDi Odyssey",
-	// 		"author": "John Doe, Esq.",
-	// 		"year":   "1973",
-	// 		"keywords": []string{
-	// 			"Bi(Di)",
-	// 			"2008 (\u05E9\u05E0\u05D4)",
-	// 			"2008 (year)",
-	// 		}},
-	// 		`<div id="title1" style="font-variant:small-caps" >2008: A BiDi Odyssey</div>` +
-	// 			`<div id="title2" style="font-variant:small-caps">2008: A BiDi Odyssey</div>by John Doe, Esq. (1973)` +
-	// 			`<div id="choose_a_keyword">Your favorite keyword: ` +
-	// 			`<select><option value="Bi(Di)">Bi(Di)</option>` +
-	// 			`<option value="2008 (???)">?2008 (???)??</option>` +
-	// 			`<option value="2008 (year)">2008 (year)</option></select></div>` +
-	// 			`<a href="#" style="float:right">Help</a><br>`},
+	//{"demoBidiSupport", "", d{
+	//	"title":  "2008: A BiDi Odyssey",
+	//	"author": "John Doe, Esq.",
+	//	"year":   "1973",
+	//	"keywords": []string{
+	//		"Bi(Di)",
+	//		"2008 (\u05E9\u05E0\u05D4)",
+	//		"2008 (year)",
+	//	}},
+	//	`<div id="title1" style="font-variant:small-caps" >2008: A BiDi Odyssey</div>` +
+	//		`<div id="title2" style="font-variant:small-caps">2008: A BiDi Odyssey</div>by John Doe, Esq. (1973)` +
+	//		`<div id="choose_a_keyword">Your favorite keyword: ` +
+	//		`<select><option value="Bi(Di)">Bi(Di)</option>` +
+	//		`<option value="2008 (???)">?2008 (???)??</option>` +
+	//		`<option value="2008 (year)">2008 (year)</option></select></div>` +
+	//		`<a href="#" style="float:right">Help</a><br>`},
 
+
+	//{"demoParamWithKindAttribute", "", d{
+	//	"message": "Gopher Kids",
+	//	"list": []string{"Ada", "Rory", "Liam"},
+	//}, "<div><div><b>Gopher Kids</b></div><ol><li>Ada</li><li>Rory</li><li>Liam</li></ol></div>"},
+
+	{"helloNames", "soy.examples.simple", d{"names": []string{"Ada", "Rory", "Liam"}}, "Hello Ada!<br>Hello Rory!<br>Hello Liam!"},
 }
 
 // TestFeatures runs through the feature examples from:
@@ -221,11 +229,12 @@ func BenchmarkExecuteFeatures(b *testing.B) {
 	var buf = new(bytes.Buffer)
 	for i := 0; i < b.N; i++ {
 		for _, test := range featureTests {
-			// if test.name != "demoAutoescapeTrue" {
-			// 	continue
-			// }
 			buf.Reset()
-			err = tofu.Render(buf, "soy.examples.features."+test.name, test.data)
+			var namespace = test.namespace
+			if namespace == "" {
+				namespace = "soy.examples.features"
+			}
+			err = tofu.Render(buf, namespace+"."+test.name, test.data)
 			if err != nil {
 				b.Error(err)
 			}
@@ -391,8 +400,12 @@ func TestFeaturesJavascript(t *testing.T) {
 	// Now run all the tests.
 	for _, test := range featureTests {
 		var jsonData, _ = json.Marshal(test.data)
+		var namespace = test.namespace
+		if namespace == "" {
+			namespace = "soy.examples.features"
+		}
 		var renderStatement = fmt.Sprintf("%s(JSON.parse(%q));",
-			"soy.examples.features."+test.name, string(jsonData))
+			namespace+"."+test.name, string(jsonData))
 		var actual, err = otto.Run(renderStatement)
 		if err != nil {
 			t.Errorf("render error: %v\n%v", err, string(jsonData))
@@ -459,9 +472,13 @@ func runFeatureTests(t *testing.T, tests []featureTest) {
 	b := new(bytes.Buffer)
 	for i, test := range tests {
 		b.Reset()
-		err = tofu.Render(b, "soy.examples.features."+test.name, test.data)
+		var namespace = test.namespace
+		if namespace == "" {
+			namespace = "soy.examples.features"
+		}
+		err = tofu.Render(b, namespace+"."+test.name, test.data)
 		if err != nil {
-			t.Error(err)
+			t.Error(fmt.Errorf("%s: %v", test.name, err))
 			continue
 		}
 

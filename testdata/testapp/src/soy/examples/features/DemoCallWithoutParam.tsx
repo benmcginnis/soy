@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HelloWorld } from '../simple/HelloWorld';
+import { HelloWorld } from '../simple';
 import { TripReport_ } from './TripReport_';
 
 export interface DemoCallWithoutParamProps {

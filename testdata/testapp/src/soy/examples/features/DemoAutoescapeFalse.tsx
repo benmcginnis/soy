@@ -15,8 +15,8 @@ export function DemoAutoescapeFalse(props: DemoAutoescapeFalseProps) {
   return (
     <>
       {/* Note: Use autoescape="false" with care, as more cross-site scripting bugs may slip through. */}
-      {props.italicHtml}<br/> {/* no autoescaping will be applied */}
-      {escapeHtml(props.italicHtml)}<br/>  {/* escapeHtml directive applies HTML escaping */}
+      {italicHtml}<br/> {/* no autoescaping will be applied */}
+      {escapeHtml(italicHtml)}<br/>  {/* escapeHtml directive applies HTML escaping */}
     </>
   )
 }

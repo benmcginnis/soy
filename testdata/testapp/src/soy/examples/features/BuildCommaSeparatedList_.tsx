@@ -17,7 +17,7 @@ export interface BuildCommaSeparatedListProps_ {
 export const BuildCommaSeparatedList_ = (props: BuildCommaSeparatedListProps_) => {
   return (
     <>
-      {props.items.map((item, index, arr) => {
+      {props.items.map((item, index) => {
         return (
           <React.Fragment key={index}>
             {(()=>{
