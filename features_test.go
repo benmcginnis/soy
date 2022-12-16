@@ -449,6 +449,13 @@ func runFeatureTests(t *testing.T, tests []featureTest) {
 		return
 	}
 
+
+	f, err := os.Create("testdata/testapp/src/soyoutput.html")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
 	b := new(bytes.Buffer)
 	for _, test := range tests {
 		b.Reset()
@@ -457,7 +464,14 @@ func runFeatureTests(t *testing.T, tests []featureTest) {
 			t.Error(err)
 			continue
 		}
-		if b.String() != test.output {
+
+		result := b.String()
+
+		if _, err = f.Write([]byte(result)); err != nil {
+			t.Error(err)
+		}
+
+		if result != test.output {
 			t.Errorf("%s\nexpected\n%q\n\ngot\n%q", test.name, test.output, b.String())
 		}
 	}
