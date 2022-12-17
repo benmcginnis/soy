@@ -1,4 +1,4 @@
-package soyjs
+package soytsx
 
 import (
 	"bytes"
@@ -6,6 +6,7 @@ import (
 	"io"
 	"sort"
 	"strconv"
+	"strings"
 	"text/template"
 
 	"github.com/robfig/soy/ast"
@@ -42,10 +43,6 @@ func difference(a map[string]string, b map[string]bool) []string {
 // writer.  The first error encountered is returned.
 func Write(out io.Writer, node ast.Node, options Options) (err error) {
 	defer errRecover(&err)
-
-	if options.Formatter == nil {
-		options.Formatter = &ES5Formatter{}
-	}
 
 	var (
 		tmpOut     = &bytes.Buffer{}
@@ -249,6 +246,7 @@ func (s *state) walk(node ast.Node) {
 }
 
 func (s *state) visitSoyFile(node *ast.SoyFileNode) {
+	s.jsln("import * as React from 'react';")
 	s.visitChildren(node)
 }
 
@@ -259,7 +257,8 @@ func (s *state) visitChildren(parent ast.ParentNode) {
 }
 
 func (s *state) visitNamespace(node *ast.NamespaceNode) {
-	// nothing to do here
+	s.autoescape = node.Autoescape
+	// nothing else to do here
 }
 
 func (s *state) visitTemplate(node *ast.TemplateNode) {
@@ -268,33 +267,61 @@ func (s *state) visitTemplate(node *ast.TemplateNode) {
 		s.autoescape = node.Autoescape
 	}
 
-	// Determine if we need nullsafe initialization for opt_data
-	var allOptionalParams = false
-	if soydoc, ok := s.lastNode.(*ast.SoyDocNode); ok {
-		allOptionalParams = len(soydoc.Params) > 0
-		for _, param := range soydoc.Params {
-			if !param.Optional {
-				allOptionalParams = false
+	callName, callStyle := s.options.Formatter.Template(node.Name)
+	s.funcsInFile[callName] = true
+	propsName :=  callStyle + "Props"
+	soyDoc, hasSoyDoc := s.lastNode.(*ast.SoyDocNode)
+	hasParams := hasSoyDoc && len(soyDoc.Params) > 0
+
+	// create an interface from the param block
+	// also create doc comments
+	if hasParams {
+		s.jsln("")
+		s.jsln("export interface " + propsName + " {")
+		s.indentLevels++
+
+		for _, param := range soyDoc.Params {
+			paramLine := param.Name
+
+			if param.Optional {
+				paramLine+="?"
 			}
+			s.jsln(paramLine + ": any;")
 		}
+		s.indentLevels--
+		s.jsln("}")
 	}
 
 	s.jsln("")
-	callName, callStyle := s.options.Formatter.Template(node.Name)
-	s.jsln(callStyle, "(opt_data, opt_sb, opt_ijData) {")
-	s.funcsInFile[callName] = true
-	s.indentLevels++
-	if allOptionalParams {
-		s.jsln("opt_data = opt_data || {};")
+	var props string
+	if hasParams {
+		props = "props: " + propsName
 	}
-	s.jsln("var output = '';")
-	s.bufferName = "output"
+
+	s.jsln(callStyle, "("+ props +") {")
+	s.indentLevels++
+
+	if hasParams {
+		var names []string
+		for _, param := range soyDoc.Params {
+			names = append(names, param.Name)
+		}
+		s.jsln("const { " + strings.Join(names, ", ") + " } = props;")
+	}
+
+	s.jsln("return (")
+	s.indentLevels++
+	s.jsln("<>")
+	s.indentLevels++
 	s.scope.push()
 	defer s.scope.pop()
 	s.walk(node.Body)
-	s.jsln("return output;")
 	s.indentLevels--
-	s.jsln("};")
+	s.jsln("</>")
+	s.indentLevels--
+	s.jsln(")")
+	s.indentLevels--
+	s.jsln("}")
 	s.autoescape = oldAutoescape
 }
 
