@@ -523,13 +523,14 @@ func (t *tree) parseSoyDoc(token item) ast.Node {
 		var optional = false
 		switch next := t.next(); next.typ {
 		case itemText:
+			//fmt.Println(next.pos, next.va)
 			// ignore
 		case itemSoyDocOptionalParam:
 			optional = true
 			fallthrough
 		case itemSoyDocParam:
 			var ident = t.expect(itemIdent, "soydoc param")
-			params = append(params, &ast.SoyDocParamNode{next.pos, ident.val, optional})
+			params = append(params, &ast.SoyDocParamNode{next.pos, ident.val, optional, ""})
 		case itemSoyDocEnd:
 			return &ast.SoyDocNode{token.pos, params}
 		default:

@@ -198,6 +198,7 @@ type SoyDocParamNode struct {
 	Pos
 	Name     string // e.g. "name"
 	Optional bool
+	TrailingComment string
 }
 
 func (n *SoyDocParamNode) String() string {
@@ -205,7 +206,7 @@ func (n *SoyDocParamNode) String() string {
 	if n.Optional {
 		expr += "?"
 	}
-	return expr + " " + n.Name
+	return expr + " " + n.Name + " " + n.TrailingComment
 }
 
 type PrintNode struct {
